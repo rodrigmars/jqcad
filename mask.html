@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="container">
+        <div class="row">
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input class="form-control" type="text" placeholder="nome" id="nome">
+                        <div class="">Sorry, that username's taken. Try another?</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="idade" class="form-label">Idade</label>
+                        <input class="form-control" type="text" placeholder="idade" id="idade">
+                        <div class="">Sorry, that username's taken. Try another?</div>
+                    </div>
+                    <button type="button" id="btnConfirma">Confirma</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="scripts/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/jquerymask/jquery.mask.min.js"></script>
+
+    <script>
+        (function($) {
+
+            'use strict';
+
+            var help = [];
+            var letter = /[^a-zA-Z-_. ]/g;
+            var number = /[^0-9\.]/g;
+
+            function isNumber(evt) {
+
+                evt = (evt) ? evt : window.event;
+
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+
+                return true;
+            }
+
+            function isAlfa(evt, regExp) {
+                if (evt.keyCode == 8 || evt.keyCode == 9 || evt.keyCode == 13) return;
+
+                var char = String.fromCharCode(evt.which)
+                if (char.match(regExp)) evt.preventDefault();
+            }
+
+            function replaceChar(evt, regExp) {
+                return $(evt).val($(evt).val().replace(regExp, ''));
+            }
+
+            function validaForm(frm) {
+
+                var validation = true;
+
+                if (frm.nome.val().trim().length == 0) {
+                    help.push({
+                        key: "nome",
+                        message: "Campo nome obrigatório"
+                    });
+                    validation = false;
+                };
+
+                if (frm.idade.val().trim().length == 0) {
+                    help.push({
+                        key: "idade",
+                        message: "Campo idade obrigatório"
+                    });
+                    validation = false;
+                };
+
+                return (validation) ? true : false;
+            }
+
+            $(function() {
+
+                var frm = {
+                    nome: $("#nome"),
+                    idade: $("#idade")
+                };
+
+                $(frm.nome).on('keypress', function(e) {
+                    isAlfa(e, letter);
+                }).on('blur', function(e) {
+                    return replaceChar(this, letter);
+                }).on('click', function() {
+                    this.select();
+                });
+
+                $(frm.idade).on('keypress', function(e) {
+                    return isNumber(e);
+                }).on('blur', function(e) {
+                    return replaceChar(this, number);
+                }).on('click', function() {
+                    this.select();
+                });
+
+                $("#btnConfirma").on("click", function() {
+
+                    if (!validaForm(frm)) {
+                        console.log("Dispara alerta");
+                        console.log("help", help);
+
+                        //TO DO executa alerta
+                    } else {
+                        //TO DO executa ajax
+                    };
+
+                    help = null;
+                });
+            });
+        })(jQuery)
+    </script>
+
+</body>
+
+</html>
