@@ -23,6 +23,12 @@
                         <input class="form-control" type="text" placeholder="idade" id="idade">
                         <div class="" help-notification="idade"></div>
                     </div>
+                    <div class="form-group">
+                        <label for="campoTexto" class="form-label">Campo Texto</label>
+                        <input class="form-control" type="text" placeholder="Campo texto" id="campoTexto">
+                        <div class="" help-notification="campoTexto"></div>
+                    </div>
+
                     <button type="button" id="btnConfirma">Confirma</button>
                 </form>
             </div>
@@ -41,6 +47,7 @@
             var help = [];
             var letter = /[^a-zA-Z-_. ]/g;
             var number = /[^0-9\.]/g;
+            var alpha = /^[a-zA-Z0-9-_. ]+$/g;
 
             function isNumber(evt) {
 
@@ -62,6 +69,16 @@
 
             function replaceChar(evt, regExp) {
                 return $(evt).val($(evt).val().replace(regExp, ''));
+            }
+
+            function alphaNumeric(evt, regExp) {
+
+                if (evt.keyCode == 8 || evt.keyCode == 9 || evt.keyCode == 13) return;
+
+                var regex = new RegExp(regExp);
+                var str = String.fromCharCode(!evt.charCode ? evt.which : evt.charCode);
+
+                if (!regex.test(str)) evt.preventDefault();
             }
 
             function validaForm(frm) {
@@ -91,7 +108,8 @@
 
                 var frm = {
                     nome: $("#nome"),
-                    idade: $("#idade")
+                    idade: $("#idade"),
+                    campoTexto: $("#campoTexto")
                 };
 
                 $(frm.nome).on('keypress', function(e) {
@@ -109,6 +127,29 @@
                 }).on('click', function() {
                     this.select();
                 });
+
+                $(frm.campoTexto).on('keypress', function(e) {
+                    return alphaNumeric(e, alpha);
+                }).on('blur', function(e) {
+
+                    if ($(this).val().trim().length < 1) return;
+
+                    var regex = new RegExp(alpha);
+
+                    console.log("str: ", regex.test($(this).val()));
+
+                    if (!regex.test($(this).val())) {
+                        console.log("chegando aqui");
+                        $(this).focus();
+                        e.preventDefault();
+
+                    };
+
+
+                }).on('click', function() {
+                    this.select();
+                });
+
 
                 $("#btnConfirma").on("click", function() {
 

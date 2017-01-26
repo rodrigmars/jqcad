@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="./assets/js/plugins/jquery/jquery.min.js"></script>
+    <script src="./assets/js/plugins/bootstrap/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="rows">
+            <form id="frmCadastro" class="form-group">
+                <div class="form-group">
+                    <label for="">Nome Razão Social</label>
+                    <input type="text" class="form-control" id="nomeRazaoSocial" required pattern="[a-zA-Z]+" />
+                    <small help-id="nomeRazaoSocial" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">CNPJ</label>
+                    <input type="text" class="form-control" id="cnpj">
+                    <small help-id="cnpj" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">Perfil</label>
+                    <select class="form-control" id="cboPerfil">
+                        <option value="">Selecione...</option>
+                        <option value="1">PERFIL 01</option>
+                        <option value="2">PERFIL 02</option>
+                        <option value="3">PERFIL 03</option>
+                    </select>
+                    <small help-id="perfil" class="form-text text-muted"></small>
+                </div>
+
+            </form>
+
+            <button type="button" class="btn btn-primary" id="btnConfirma">Confirma</button>
+        </div>
+    </div>
+
+    <script src="./assets/js/plugins/formsvalidator/formsvalidator.js"></script>
+
+    <script>
+        (function($) {
+
+            'use strict';
+
+            $(function() {
+
+                var validation = function(obj) {
+
+                    var validation = true;
+
+                    $.each(obj, function(i) {
+
+                        if (obj[i].field.val().trim().length < 1) {
+                            $("small[help-id='" + obj[i].field.attr('id') + "']").text(obj[i].message);
+                            validation = false;
+                        };
+
+                        // if(obj[i].type == "text"){
+
+                        // }else if()
+
+
+                        if (obj[i].field.val().trim().length > 0) {
+
+                            switch (obj[i].type) {
+                                case "string":
+
+                                    break;
+                                case "number":
+
+                                    break;
+                                case "alphanumeric":
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        };
+
+                    });
+
+                    if (validation) $("small[help-id]").text("");
+
+                    return validation;
+                };
+
+
+                var form = {
+                    razaosocial: $("#nomeRazaoSocial"),
+                    cnpj: $("#cnpj"),
+                    perfil: $("#cboPerfil"),
+                    btnConfirma: $("#btnConfirma")
+                };
+
+                form.razaosocial.on('click', function() {
+                    this.select();
+                });
+
+                form.cnpj.on('click', function() {
+                    this.select();
+                });
+
+                form.btnConfirma.on("click", function(e) {
+
+
+                    // console.log("nome razão social >>>>", form.razaosocial.val());
+                    // console.log($("#cboPerfil option:selected").text());
+                    // checkField({
+                    //     // textField: true
+                    // });
+
+                    // function checkField(obj) {
+
+                    //     var configType = null;
+
+                    //     console.log("0 configType", configType);
+
+                    //     configType = {
+                    //         textField: (typeof obj.textField == "undefined") ? false : obj.textField,
+                    //         selectField: (typeof obj.selectField == "undefined") ? false : obj.selectField,
+                    //         radioField: (typeof obj.radioField == "undefined") ? false : obj.radioField,
+                    //         checkBoxField: (typeof obj.checkBoxField == "undefined") ? false : obj.checkBoxField,
+                    //         textAreaField: (typeof obj.textAreaField == "undefined") ? false : obj.textAreaField
+                    //     };
+
+                    //     console.log("1 configType", configType);
+
+                    //     if (configType.textField) {
+                    //         console.log("textField");
+                    //     } else if (configType.selectField) {
+                    //         console.log("selectField");
+                    //     } else if (configType.checkBoxField) {
+                    //         console.log("checkBoxField");
+                    //     } else if (configType.textField) {
+                    //         console.log("textField");
+                    //     } else {
+                    //         console.log("INFORME O TIPO DE CAMPO PARA ...");
+                    //     }
+
+                    //     configType = null;
+
+                    //     console.log("2 configType", configType);
+
+
+                    //     // switch (configType) {
+                    //     //     case configType.textField:
+                    //     //         console.log("configType.textField: ", configType.textField);
+
+                    //     //         break;
+                    //     //     case configType.selectField:
+
+                    //     //         console.log("configType.selectField: ", configType.selectField);
+                    //     //         break;
+                    //     // };
+
+                    // };
+
+
+                    // SE RETORNO FOR TRUE EXECUTA CHAMADA AJAX
+                    if ($("#frmCadastro").formfirevalidate([{
+                            field: "nomeRazaoSocial",
+                            validateCNPJ: true,
+                            'location': 'left',
+                        }, {
+                            field: "cnpj",
+                        }, {
+                            field: "cboPerfil",
+                        }, ])) {
+
+                    };
+
+
+
+
+
+
+                    // console.log("type perfil ", form.perfil);
+
+                    // console.log("isEmpty: ", form.perfil.children("option").filter(":selected").val().trim().length);
+
+                    // console.info("perfil VALOR", form.perfil.children("option").filter(":selected").val());
+                    // console.info("perfil TEXTO", form.perfil.children("option").filter(":selected").text());
+
+                    e.preventDefault();
+
+                    // var result = validation([{
+                    //     field: form.razaosocial,
+                    //     rules: [{
+                    //         allowEmpty: false,
+                    //         message: "Campo nome razão social obrigatório.",
+                    //     }, {
+                    //         isAlphaNumeric: true,
+                    //         customRegExp: null,
+                    //         message: "Informe apenas texto para razão social.",
+                    //     }, {
+                    //         minField: true,
+                    //         minLength: 5,
+                    //         message: "Informe no mínimo 5 caracteres para razão social.",
+                    //     }, {
+                    //         maxField: true,
+                    //         minLength: 100,
+                    //         message: "Informe no máximo 100 caracteres para razão social.",
+                    //     }]
+                    // }, {
+                    //     field: form.razaosocial,
+                    //     selectField: true,
+                    //     rules: [{
+
+                    //     }]
+                    // }]);
+
+                    // console.log("[ result: ", result + " ].");
+
+                });
+            });
+
+        })(jQuery)
+    </script>
+
+</body>
+
+</html>
