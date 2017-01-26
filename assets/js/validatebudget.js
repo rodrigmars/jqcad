@@ -12,6 +12,8 @@
                 if (e.which == 13 || e.keyCode == 13) {};
             });
 
+        console.log();
+
         var form = $("form[name='frmCadastro']");
 
         var fields = {
