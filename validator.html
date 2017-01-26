@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <form name="frmCadastro" id="frmCadastro">
+                <div class="form-group">
+                    <label for="cpf">Razão Social</label>
+                    <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" aria-describedby="razaoSocial" placeholder="Razão Social">
+                    <small id-help="razaoSocial" class="form-text text-muted"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="CNPJ">
+                    <small id-help="cnpj" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="text" class="form-control" name="idade" id="idade" aria-describedby="idade" placeholder="Idade">
+                    <small id-help="idade" class="form-text text-muted"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Enter email">
+                    <small class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="profissao">Example select</label>
+                    <select class="form-control" name="profissao" id="profissao">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                    </select>
+                </div>
+
+                <button type="button" id="btnConfirma" class="btn btn-large btn-block btn-primary">Confirma</button>
+            </form>
+        </div>
+
+    </div>
+    </div>
+    <script src="./assets/js/plugins/jquery/jquery.min.js"></script>
+    <script src="./assets/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="./assets/js/plugins/jquerymask/jquery.mask.min.js"></script>
+    <script src="./assets/js/plugins/validacpfcnpj/validacpfcnpj.js"></script>
+    <script src="./assets/js/plugins/validation/jquery.validate.min.js"></script>
+    <script src="./assets/js/plugins/validation/additional-methods.min.js"></script>
+    <script src="./assets/js/validatebudget.js"></script>
+
+</body>
+
+</html>
